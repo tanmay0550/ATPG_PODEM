@@ -1,2 +1,9 @@
 # ATPG_PODEM
 ATPG
+Implemented the SAT-attack methodology to compromise Logic Encryption techniques, such as Random Logic Locking (RLL), employing key sizes of 32, 64, and 128 bits for Logic Encryption. The approach involved applying the SAT-attack technique to decrypt RLL-encrypted ISCAS’89 and ITC’99 benchmark circuits with the aim of determining the correct encryption key. An assessment was conducted on the time and number of iterations necessary to successfully break the Logic Encryption.
+
+The SAT Attack, which gained prominence before 2015, marked a shift from focusing solely on output corruption in logic circuits within various logic locking schemes. This method hinges on boolean satisfiability and has the capability to compromise the security of a broad range of logic locking schemes. It necessitates two primary components: the netlist of the locked gate-level circuit and an activated chip acting as an oracle.
+
+Within this attack strategy, a miter circuit is synthesized using the locked netlist, incorporating two distinct keys while retaining the same primary inputs. Clauses are generated for the miter circuit, and a clause that satisfies the primary inputs is identified, guaranteeing differing outputs for the two keys. This specific satisfying clause is referred to as a distinguishing input pattern (DIP).
+
+Following this, the DIP is input into the oracle to discern the accurate output. The precise output corresponding to the provided DIP is integrated as a constraint within the SAT solver. This constraint ensures that for the given DIP, the solver eliminates all keys with outputs that deviate from the accurate output. Consequently, multiple keys can be ruled out in a single iteration. This iterative procedure continues until no more DIPs are present. Ultimately, the key that satisfies all constraints imposed by the DIPs is determined as the correct encryption key.
